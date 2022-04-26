@@ -30,7 +30,7 @@ class MLP(nn.Module):
         return qvalues
 
 class CNN(nn.Module):
-    def __init__(self, ny: int, nx: int, nf: int, na: int):
+    def __init__(self):
         """À MODIFIER QUAND NÉCESSAIRE.
         Ce constructeur crée une instance de réseau de neurones convolutif (CNN).
         L'architecture choisie doit être choisie de façon à capter toute la complexité du problème
@@ -42,13 +42,13 @@ class CNN(nn.Module):
         super(CNN, self).__init__()
         
         self.layers = nn.Sequential(
-            nn.Conv2d(nf, 32, 3, stride=1, padding="same", bias=True),
+            nn.Conv2d(4, 32, 3, stride=1, padding="same", bias=True),
             nn.ReLU(),
             nn.Conv2d(32, 32, 3, stride=1, padding="same", bias=True),
             nn.ReLU(),
             nn.Flatten(),
-            nn.Linear(ny * nx * 32, 120),
-            nn.Linear(120, na)
+            nn.Linear(5*5*5*2, 120),
+            nn.Linear(120, 4)
         )
 
         self.layers.apply(weights_init)

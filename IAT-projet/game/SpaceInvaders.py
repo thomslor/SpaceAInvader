@@ -115,9 +115,10 @@ class SpaceInvaders():
         posXPlayer = self.get_player_X() // 160
         posXAlien = posXAlien // 160
         posXBullet = self.get_bullet_X() // 160
+        posYAlien = posYAlien // 120
             
 
-        return np.array([posXPlayer, posXAlien, posYAlien, bullet_state])
+        return np.array([posXPlayer, posXAlien])
         
     def reset(self):
         """Reset the game at the initial state.
@@ -173,7 +174,7 @@ class SpaceInvaders():
             self.player_Xchange = 1.7
         if action == 2: # FIRE
             self.player_Xchange = 0
-            reward = -0.8
+            reward = -0.01
             # Fixing the change of direction of bullet
             if self.bullet_state is "rest":
                 self.bullet_X = self.player_X

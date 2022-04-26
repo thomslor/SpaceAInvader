@@ -168,11 +168,16 @@ class DQNAgent():
                 
                 # Stocke les données d'apprentissage
                 sum_rewards[episode] += reward
-                # print("Rewards : ", sum_rewards[episode])
+                
+
+                print("Rewards : ", sum_rewards[episode])
                 len_episode[episode] += 1
 
                 # Mets à jour la fonction de valeur Q
                 self.updateQ(state, action, reward, next_state, terminal)
+
+                if reward == 1:
+                    break
 
                 if terminal:
                     n_steps[episode] = step + 1  # number of steps taken
