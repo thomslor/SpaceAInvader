@@ -23,21 +23,6 @@ class DQNAgent():
         Il doit stocker les différents paramètres nécessaires au fonctionnement 
         de l'algorithme et initialiser la fonction de valeur d'action, notée Q.
 
-        :param maze: Le labyrinthe à résoudre 
-        :type maze: Maze
-        :param eps_profile: Le profil du paramètre d'exploration epsilon 
-        :type eps_profile: EpsilonProfile
-        :param gamma: Le facteur d'atténuation
-        :type gamma: float
-        :param alpha: Le taux d'apprentissage
-        :type alpha: float
-        :param tau: Le taux de mise à jour du réseau cible
-        :type tau: float
-        :param target_update_frequency: La fréquence de mise à jour du réseau cible
-        :type target_update_frequency: int
-        :param batch_size: La taille de l'échantillon utilisé pour la mise à jour du 
-        réseau Q
-        :type batch_size: int
         """
         print(model)
         self.policy_net = model
@@ -64,6 +49,7 @@ class DQNAgent():
         # Méthode de descente de gradient
         self.optimizer = optim.Adam(self.policy_net.parameters(), lr=self.alpha)
 
+        # Nombre d'actions possibles
         self.na = 4
 
     def init_replay_memory(self, env: SpaceInvaders):
@@ -73,11 +59,11 @@ class DQNAgent():
         :type env: SpaceInvaders
         """
         # Replay memory pour s, a, r, terminal, and sn
-        self.Ds = np.zeros([self.replay_memory_size, 2], dtype=np.float32)
+        self.Ds = np.zeros([self.replay_memory_size, 5], dtype=np.float32)
         self.Da = np.zeros([self.replay_memory_size, env.na], dtype=np.float32)
         self.Dr = np.zeros([self.replay_memory_size], dtype=np.float32)
         self.Dt = np.zeros([self.replay_memory_size], dtype=np.float32)
-        self.Dsn = np.zeros([self.replay_memory_size, 2], dtype=np.float32)
+        self.Dsn = np.zeros([self.replay_memory_size, 5], dtype=np.float32)
 
         self.d = 0     # counter for storing in D
         self.ds = 0    # total number of steps
@@ -131,15 +117,7 @@ class DQNAgent():
             self.optimizer.step()
 
     def learn(self, env, n_episodes, max_steps):
-        """Cette méthode exécute l'algorithme de q-learning. 
-        Il n'y a pas besoin de la modifier. Simplement la comprendre et faire le parallèle avec le cours.
-
-        :param env: L'environnement 
-        :type env: gym.Env
-        :param num_episodes: Le nombre d'épisode
-        :type num_episodes: int
-        :param max_num_steps: Le nombre maximum d'étape par épisode
-        :type max_num_steps: int
+        """Cette méthode exécute l'algorithme de q-learning pour la phase d'entraînement. 
         """
         self.na = 4
         self.init_replay_memory(env)
@@ -176,9 +154,6 @@ class DQNAgent():
                 # Mets à jour la fonction de valeur Q
                 self.updateQ(state, action, reward, next_state, terminal)
 
-                if reward == 1:
-                    break
-
                 if terminal:
                     n_steps[episode] = step + 1  # number of steps taken
                     break
@@ -204,7 +179,7 @@ class DQNAgent():
     
 
     def select_action(self, state : 'Tuple[int, int]'):
-        """À COMPLÉTER!
+        """
         Cette méthode retourne une action échantilloner selon le processus d'exploration (ici epsilon-greedy).
 
         :param state: L'état courant

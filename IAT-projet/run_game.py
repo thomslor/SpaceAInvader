@@ -17,7 +17,7 @@ n_episodes = 200
 max_steps = 2000
 alpha = 0.01
 gamma = 1.
-eps_profile = EpsilonProfile(0.6, 0.1)
+eps_profile = EpsilonProfile(1., 0.1)
 
 
 game = SpaceInvaders(display=True)

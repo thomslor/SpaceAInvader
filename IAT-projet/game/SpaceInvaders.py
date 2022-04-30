@@ -121,7 +121,10 @@ class SpaceInvaders():
         if posXAlien > 10:
             posXAlien = 10
         
-        posXBullet = self.get_bullet_X() // 160
+        posXBullet = self.get_bullet_X() // 80
+        if posXBullet > 10:
+            posXBullet = 10
+
         posYAlien = posYAlien // 120
         if posYAlien >= 5:
             posYAlien = 4
