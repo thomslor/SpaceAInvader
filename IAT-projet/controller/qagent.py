@@ -41,10 +41,10 @@ class QAgent(AgentInterface):
         
         # Initialise la fonction de valeur Q
         # Implémentation Distance
-        self.Q = np.zeros([11,2,5,2,4])
+        # self.Q = np.zeros([11,2,5,2,4])
         
         # Implémentation position
-        # self.Q = np.zeros([10,10,5,2,4])
+        self.Q = np.zeros([10,10,5,2,4])
         
 
         self.game = SpaceInvaders

@@ -134,10 +134,10 @@ class SpaceInvaders():
             direction = 0 # left
         
         #Implémentation Distance
-        return delta_X, direction, posYAlien, bullet_state
+        # return delta_X, direction, posYAlien, bullet_state
         
         #Implémentation Position
-        # return posXPlayer, posXAlien, posYAlien, bullet_state
+        return posXPlayer, posXAlien, posYAlien, bullet_state
 
         
         
