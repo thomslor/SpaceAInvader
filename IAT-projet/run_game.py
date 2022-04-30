@@ -13,14 +13,15 @@ from matplotlib import pyplot as plt
 
 
 # Hyperparamètres 
-n_episodes = 300
+n_episodes = 200
 max_steps = 2000
 alpha = 0.1
 gamma = 1.
 eps_profile = EpsilonProfile(0.7, 0.15)
 
-
+# Passer à True pour voir le comportement de l'agent
 game = SpaceInvaders(display=False)
+
 # model = MLP()
 # controller = KeyboardController()
 # controller = DQNAgent(model, eps_profile, gamma, alpha)
