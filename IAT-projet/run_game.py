@@ -4,7 +4,7 @@ from controller.keyboard import KeyboardController
 from controller.random_agent import RandomAgent
 
 from controller.epsilon_profile import EpsilonProfile
-from controller.networks import MLP, CNN
+from controller.networks import MLP
 from controller.dqn_agent import DQNAgent
 from controller.qagent import QAgent
 

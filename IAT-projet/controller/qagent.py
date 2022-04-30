@@ -24,7 +24,7 @@ class QAgent(AgentInterface):
         # self.Q = np.zeros([11,2,5,2,4])
         
         # Implémentation position
-        self.Q = np.zeros([10,10,5,10,2,4])
+        self.Q = np.zeros([10,10,5,2,4])
         
 
         self.game = SpaceInvaders
