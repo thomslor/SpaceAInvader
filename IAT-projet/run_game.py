@@ -15,22 +15,22 @@ from matplotlib import pyplot as plt
 # Hyperparamètres 
 n_episodes = 200
 max_steps = 2000
-alpha = 0.01
+alpha = 0.1
 gamma = 1.
-eps_profile = EpsilonProfile(1., 0.1)
+eps_profile = EpsilonProfile(0.9, 0.1)
 
 
-game = SpaceInvaders(display=True)
-# model = MLP()
+game = SpaceInvaders(display=False)
+model = MLP()
 # controller = KeyboardController()
-# controller = DQNAgent(model, eps_profile, gamma, alpha)
+controller = DQNAgent(model, eps_profile, gamma, alpha)
 # controller = RandomAgent(game.na)
-controller = QAgent(game, eps_profile, gamma, alpha)
+# controller = QAgent(game, eps_profile, gamma, alpha)
 controller.learn(game, n_episodes, max_steps)
 print("Phase d'entraînement terminée")
 
 print("Phase de test")
-
+game.display = True
 state = game.reset()
 
 nb_tires = 0

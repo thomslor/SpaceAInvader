@@ -147,8 +147,6 @@ class DQNAgent():
                 # Stocke les données d'apprentissage
                 sum_rewards[episode] += reward
                 
-
-                print("Rewards : ", sum_rewards[episode])
                 len_episode[episode] += 1
 
                 # Mets à jour la fonction de valeur Q

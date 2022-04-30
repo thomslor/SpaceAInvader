@@ -126,8 +126,8 @@ class SpaceInvaders():
             posXBullet = 10
 
         posYAlien = posYAlien // 120
-        if posYAlien >= 5:
-            posYAlien = 4
+        if posYAlien > 5:
+            posYAlien = 5
 
         delta_X = abs(posXAlien - posXPlayer)
         
@@ -142,6 +142,18 @@ class SpaceInvaders():
         #Implémentation Position
         return posXPlayer, posXAlien, posYAlien, bullet_state
 
+        #Etat pour le DQN
+        """
+        posXPlayer = self.get_player_X()
+        
+        posXAlien = posXAlien
+        
+        posXBullet = self.get_bullet_X()
+
+        posYAlien = posYAlien
+
+        return posXPlayer, posXAlien, posYAlien, posXBullet, bullet_state
+        """
         
         
     def reset(self):
