@@ -38,8 +38,14 @@ class QAgent(AgentInterface):
         :attribut qvalues: la Q-valeur stockée qui sera écrite dans un fichier de log après la résolution complète
         :type mazeValues: data frame pandas
         """
+        
         # Initialise la fonction de valeur Q
-        self.Q = np.zeros([10,10,5,2,4])
+        # Implémentation Distance
+        self.Q = np.zeros([11,2,5,2,4])
+        
+        # Implémentation position
+        # self.Q = np.zeros([10,10,5,2,4])
+        
 
         self.game = SpaceInvaders
         self.na = 4
@@ -50,6 +56,8 @@ class QAgent(AgentInterface):
 
         self.eps_profile = eps_profile
         self.epsilon = self.eps_profile.initial
+
+        
 
     def learn(self, env, n_episodes, max_steps):
         """Cette méthode exécute l'algorithme de q-learning. 
@@ -104,7 +112,8 @@ class QAgent(AgentInterface):
         
         # Visualisation de l'apprentissage
         p_step = [1-int(n)/max_steps for n in n_steps]
-        plt.plot(p_step)
+        p_step_cumul = np.cumsum(p_step)
+        plt.plot(p_step_cumul)
         plt.xlabel('Episode')
         plt.ylabel('% of steps')
         plt.title('Learning curve')
@@ -125,6 +134,7 @@ class QAgent(AgentInterface):
         """
         state = tuple(map(int, state))
         next_state = tuple(map(int, next_state))
+        print(state, " : ", next_state)
         self.Q[state][action] = (1. - self.alpha) * self.Q[state][action] + self.alpha * (reward + self.gamma * np.max(self.Q[next_state]))
 
     def select_action(self, state : 'Tuple[int, int]'):

@@ -23,7 +23,8 @@ class SpaceInvaders():
 
     NO_INVADERS = 1 # Nombre d'aliens
     global score_past
-    score_past = 0  
+    score_past = 0
+
     
     def __init__(self, display : bool = False):
         
@@ -113,12 +114,32 @@ class SpaceInvaders():
             bullet_state = 1
         
         posXPlayer = self.get_player_X() // 80
+        if posXPlayer > 10:
+            posXPlayer = 10
+        
         posXAlien = posXAlien // 80
+        if posXAlien > 10:
+            posXAlien = 10
+        
         posXBullet = self.get_bullet_X() // 160
         posYAlien = posYAlien // 120
-            
+        if posYAlien >= 5:
+            posYAlien = 4
 
-        return posXPlayer, posXAlien, posYAlien, bullet_state
+        delta_X = abs(posXAlien - posXPlayer)
+        
+        if posXAlien - posXPlayer > 0:
+            direction = 1 # right
+        else:
+            direction = 0 # left
+        
+        #Implémentation Distance
+        return delta_X, direction, posYAlien, bullet_state
+        
+        #Implémentation Position
+        # return posXPlayer, posXAlien, posYAlien, bullet_state
+
+        
         
     def reset(self):
         """Reset the game at the initial state.

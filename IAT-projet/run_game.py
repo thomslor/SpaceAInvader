@@ -14,10 +14,10 @@ from matplotlib import pyplot as plt
 
 # Hyperparamètres 
 n_episodes = 200
-max_steps = 1000
-alpha = 0.1
+max_steps = 2000
+alpha = 0.01
 gamma = 1.
-eps_profile = EpsilonProfile(0.6, 0.1, 0.1, 0.1)
+eps_profile = EpsilonProfile(0.6, 0.1)
 
 
 game = SpaceInvaders(display=True)
@@ -41,6 +41,9 @@ sum_reward = 0
 while nb_tires < 300:
     action = controller.select_action(state)
     state, reward, is_done = game.step(action)
+    if is_done:
+        print("Game over")
+        break
     sum_reward += reward
     print(game.nb_tire, "  ", game.score_val)
     if (nb_tires != game.nb_tire and game.nb_tire > 0 and game.bullet_state == "rest"):
